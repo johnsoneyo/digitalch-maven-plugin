@@ -22,6 +22,7 @@ import org.jdom2.output.XMLOutputter;
 /**
  * @goal dca
  * @author jihadijohn
+ * @requiresProject false
  * @parameter default-value="demo msg"
  */
 public class DemoCreateArtifact extends AbstractMojo {

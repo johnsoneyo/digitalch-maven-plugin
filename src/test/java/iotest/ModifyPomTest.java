@@ -37,7 +37,7 @@ public class ModifyPomTest {
     }
 
     @Test
-    public void modifyPom() {
+    public void modifyServicePom() {
         String tm = "pom.vm";
         String overiteFile = "/home/jihadijohn/digitalch-maven-plugin/service-pom/pom.xml";
         try {
@@ -45,6 +45,7 @@ public class ModifyPomTest {
             System.out.println("sevice name -is >>>>>>...." + context.get("servicename"));
             String result = resolveTemplate(tm, context);
             FileUtils.write(new File(overiteFile), result);
+          
         } catch (Exception e) {
             e.printStackTrace();
         }
