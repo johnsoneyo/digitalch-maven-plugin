@@ -21,7 +21,7 @@ import org.jdom2.output.XMLOutputter;
 
 /**
  * @goal dca
- * @author jihadijohn
+ * @author johnsson3yo
  * @requiresProject false
  * @parameter default-value="demo msg"
  */

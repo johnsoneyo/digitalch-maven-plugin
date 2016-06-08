@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  *
- * @author jihadijohn
+ * @author johnson3yo
  */
 public class WriteToFileTest {
 
