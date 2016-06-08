@@ -13,14 +13,14 @@
 	<packaging>jar</packaging>
 	
 	<properties>
-		<extdep.version>20</extdep.version>
+  		<extdep.version>20</extdep.version>
  		<auditlog-shared.version>4.1.0</auditlog-shared.version>
  		<pegasus-core.version>1.29.0</pegasus-core.version>
  		<pegasus-function.version>1.0.0</pegasus-function.version>
  		<pegasus-persistence.version>3.9.0</pegasus-persistence.version>
  		<pegasus-test.version>1.15.0</pegasus-test.version>
-		<localmoneytransfer-shared.version>1.0.0-SNAPSHOT</localmoneytransfer-shared.version>
-	</properties>
+ 		<minipayment-shared.version>1.0.0-SNAPSHOT</minipayment-shared.version>
+ </properties>
 	
 	<dependencyManagement>
 		<dependencies>

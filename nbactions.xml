@@ -13,7 +13,7 @@
             <displayName>ModifyTest</displayName>
             <goals>
                 <goal>test</goal>
-                <goal>-DTest=ModifyPom</goal>
+                <goal>-DTest=ModifyPomTest</goal>
             </goals>
         </action>
     </actions>

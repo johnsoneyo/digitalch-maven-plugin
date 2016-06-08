@@ -19,7 +19,7 @@ import org.junit.Test;
  *
  * @author jihadijohn
  */
-public class WriteToFile {
+public class WriteToFileTest {
 
     @Before
     public void initIO() {
@@ -38,7 +38,7 @@ public class WriteToFile {
           
 
         } catch (FileNotFoundException ex) {
-           Logger.getLogger(WriteToFile.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(WriteToFileTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException io) {
             io.printStackTrace();
         }
