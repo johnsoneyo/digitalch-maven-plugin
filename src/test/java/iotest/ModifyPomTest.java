@@ -45,7 +45,8 @@ public class ModifyPomTest {
             System.out.println("sevice name -is >>>>>>...." + context.get("servicename"));
             String result = resolveTemplate(tm, context);
             FileUtils.write(new File(overiteFile), result);
-          
+            
+            System.out.println("<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>.."+new File("").getCanonicalPath());
         } catch (Exception e) {
             e.printStackTrace();
         }

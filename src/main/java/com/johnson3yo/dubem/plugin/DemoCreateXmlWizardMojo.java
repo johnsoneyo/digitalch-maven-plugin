@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.johnson3yo;
+package com.johnson3yo.dubem.plugin;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,11 +21,11 @@ import org.jdom2.output.XMLOutputter;
 
 /**
  * @goal dca
- * @author johnsson3yo
+ * @author johnson3yo
  * @requiresProject false
  * @parameter default-value="demo msg"
  */
-public class DemoCreateArtifact extends AbstractMojo {
+public class DemoCreateXmlWizardMojo extends AbstractMojo {
 
     /**
      * @parameter expression="${echo.parameter1}"
@@ -59,9 +59,9 @@ public class DemoCreateArtifact extends AbstractMojo {
         try {
             modifyArtifact();
         } catch (IOException ex) {
-            Logger.getLogger(DemoCreateArtifact.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DemoCreateXmlWizardMojo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (PrompterException ex) {
-            Logger.getLogger(DemoCreateArtifact.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DemoCreateXmlWizardMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
