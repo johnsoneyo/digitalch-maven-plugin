@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>pegasus.framework.mdk</groupId>
+		<artifactId>parentpom</artifactId>
+		<version>26</version>
+	</parent>
+	<groupId>pegasus.module.localmoneytransfer</groupId>
+	<artifactId>localmoneytransfer-service</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<properties>
+  		<extdep.version>20</extdep.version>
+ 		<auditlog-shared.version>4.1.0</auditlog-shared.version>
+ 		<pegasus-core.version>1.29.0</pegasus-core.version>
+ 		<pegasus-function.version>1.0.0</pegasus-function.version>
+ 		<pegasus-persistence.version>3.9.0</pegasus-persistence.version>
+ 		<pegasus-test.version>1.15.0</pegasus-test.version>
+ 		<${servicename}-shared.version>1.0.0-SNAPSHOT</${servicename}-shared.version>
+ </properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>pegasus.framework.mdk</groupId>
+				<artifactId>extdep</artifactId>
+				<version>${extdep.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>localmoneytransfer-shared</artifactId>
+			<version>${localmoneytransfer-shared.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pegasus.module.auditlog</groupId>
+			<artifactId>auditlog-shared</artifactId>
+			<version>${auditlog-shared.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pegasus.framework.pdk.pegasus</groupId>
+			<artifactId>pegasus-core</artifactId>
+			<version>${pegasus-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pegasus.framework.pdk.pegasus</groupId>
+			<artifactId>pegasus-function</artifactId>
+			<version>${pegasus-function.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>pegasus.framework.pdk.pegasus</groupId>
+            <artifactId>pegasus-persistence</artifactId>
+            <version>${pegasus-persistence.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+        
+        <!-- test -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>pegasus.framework.pdk.pegasus</groupId>
+            <artifactId>pegasus-test</artifactId>
+            <version>${pegasus-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>pegasus.framework.mdk.plugin</groupId>
+				<artifactId>typegen-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

@@ -38,6 +38,14 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <type>jar</type>
+            <version>1.5</version>
+        </dependency>
+        
     </dependencies>
     
     <build>

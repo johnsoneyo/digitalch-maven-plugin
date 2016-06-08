@@ -8,4 +8,12 @@
                 <goal>install</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-ModifyTest</actionName>
+            <displayName>ModifyTest</displayName>
+            <goals>
+                <goal>test</goal>
+                <goal>-DTest=ModifyPom</goal>
+            </goals>
+        </action>
     </actions>
