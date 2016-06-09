@@ -109,8 +109,6 @@ public class ModifyArtifactsTest {
             Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NullPointerException no) {
-            System.out.println("Wizzoooo");
         }
 
     }
