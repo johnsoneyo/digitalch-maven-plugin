@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,7 +26,8 @@ public class WriteToFileTest {
     public void initIO() {
         System.out.println(">>>>>>>>>>>>>>>>> Test init running");
     }
-
+    
+    @Ignore
     @Test
     public void writeToFile() {
         System.out.println("Writing to file");

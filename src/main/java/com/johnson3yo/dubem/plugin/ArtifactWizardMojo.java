@@ -54,13 +54,16 @@ public class ArtifactWizardMojo extends AbstractMojo {
 
             ve = new VelocityEngine(prop);
 
-            updateService(functionName, context, ve);
+            updateServicePom(functionName, context, ve);
         } catch (Exception ex) {
             Logger.getLogger(ArtifactWizardMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        updateAppServletXml(functionName);
+        
     }
 
-    private void updateService(String functionName, VelocityContext context, VelocityEngine ve) throws IOException, Exception {
+    private void updateServicePom(String functionName, VelocityContext context, VelocityEngine ve) throws IOException, Exception {
 
         String service = functionName.toLowerCase().concat("-service");
 
@@ -85,5 +88,9 @@ public class ArtifactWizardMojo extends AbstractMojo {
         ve.mergeTemplate(template, "UTF-8", context, writer);
         return writer.toString();
 
+    }
+
+    private void updateAppServletXml(String functionName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
