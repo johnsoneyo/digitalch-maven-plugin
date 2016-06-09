@@ -88,30 +88,29 @@ public class ModifyArtifactsTest {
 //            }
             List<Element> list = rootNode.getChildren("component-scan", Namespace.getNamespace("http://www.springframework.org/schema/context"));
 
-            for (Element e : list) {
-              
-                if (e.getAttribute("scoped-proxy", Namespace.getNamespace("http://www.springframework.org/schema/context"))==null) {
-                     String cnt = "<context:exclude-filter type=\"regex\" expression=\"pegasus\\.module\\.gmt\\..*\" />";
-                   
-                     e.addContent(cnt);
-                
-                    XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat()) {
-                        @Override
-                        public String escapeElementEntities(String str) {
-                            return str;
-                        }
-                    };
-                    
-                    Writer writer = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
-                    outputter.output(document, writer);
-                    writer.close();
+            Element e = list.get(0);
 
+            String cnt = "<context:exclude-filter type=\"regex\" expression=\"pegasus\\.module\\.kawasakimt\\..*\" />";
+
+            e.addContent(cnt);
+
+            XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat()) {
+                @Override
+                public String escapeElementEntities(String str) {
+                    return str;
                 }
-            }
+            };
+
+            Writer writer = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
+            outputter.output(document, writer);
+            writer.close();
+
         } catch (JDOMException ex) {
             Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException no) {
+            System.out.println("Wizzoooo");
         }
 
     }
