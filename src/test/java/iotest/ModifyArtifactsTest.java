@@ -6,15 +6,19 @@
 package iotest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.velocity.VelocityContext;
@@ -22,13 +26,10 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
-import org.jdom.Text;
-import org.jdom.Verifier;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -73,24 +74,24 @@ public class ModifyArtifactsTest {
     }
 
     @Test
-    public void modifyAppServletXml() {
+    public void modifyAppServletXml() throws UnsupportedEncodingException, FileNotFoundException, IOException, JDOMException {
 
-        try {
-            String axml = "/media/sf_FBDC_PROD/app-servlet.xml";
+        System.out.println("please select app-servlet.xml file ");
+        JFileChooser fc = new JFileChooser();
+        int retValue = fc.showOpenDialog(new JPanel());
+        if (retValue == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
 
             SAXBuilder builder = new SAXBuilder();
-            File f = new File(axml);
+
             Document document = (Document) builder.build(f);
             Element rootNode = document.getRootElement();
 
-//            for(Element e : rootNode.getChildren()){
-//                System.out.println("\n"+e.get);
-//            }
             List<Element> list = rootNode.getChildren("component-scan", Namespace.getNamespace("http://www.springframework.org/schema/context"));
 
             Element e = list.get(0);
 
-            String cnt = "<context:exclude-filter type=\"regex\" expression=\"pegasus\\.module\\.kawasakimt\\..*\" />";
+            String cnt = "<context:exclude-filter type=\"regex\" expression=\"pegasus\\.module\\.jfilelooder\\..*\" />";
 
             e.addContent(cnt);
 
@@ -104,11 +105,9 @@ public class ModifyArtifactsTest {
             Writer writer = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
             outputter.output(document, writer);
             writer.close();
-
-        } catch (JDOMException ex) {
-            Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ModifyArtifactsTest.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            System.out.println("Next time select a file.");
+            System.exit(1);
         }
 
     }
