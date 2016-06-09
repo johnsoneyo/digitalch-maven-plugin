@@ -65,10 +65,17 @@ public class ArtifactWizardMojo extends AbstractMojo {
         String service = functionName.toLowerCase().concat("-service");
 
         File f = new File(service + "/pom.xml");
+        
+        if(f.exists()){
+        
         context.put("servicename", functionName.toLowerCase());
         String result = resolveTemplate("template/service-pom.vm", context);
         FileUtils.write(f, result);
-        System.out.println(">>>>>>>>>>"+f.getAbsolutePath());
+        }
+        else {
+          throw new IOException("Function name not found");
+        }
+    
     }
 
     private String resolveTemplate(String template, VelocityContext context) throws ParseErrorException, MethodInvocationException, ResourceNotFoundException, IOException, Exception {
