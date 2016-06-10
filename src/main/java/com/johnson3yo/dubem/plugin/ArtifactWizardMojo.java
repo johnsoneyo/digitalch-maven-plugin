@@ -5,9 +5,11 @@
  */
 package com.johnson3yo.dubem.plugin;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -101,11 +104,14 @@ public class ArtifactWizardMojo extends AbstractMojo {
 
     }
 
-    private void updateAppServletXml(String functionName) throws IOException, JDOMException {
+    private void updateAppServletXml_JFileChooser(String functionName) throws IOException, JDOMException {
 
         getLog().info("please select app-servlet.xml from foundation-guiwar  ");
+
         JFileChooser fc = new JFileChooser();
+
         int retValue = fc.showOpenDialog(new JPanel());
+
         if (retValue == JFileChooser.APPROVE_OPTION) {
             File f = fc.getSelectedFile();
 
@@ -136,6 +142,40 @@ public class ArtifactWizardMojo extends AbstractMojo {
             getLog().info("Next time select a file.");
             System.exit(1);
         }
+
+    }
+
+    private void updateAppServletXml(String functionName) throws IOException, JDOMException {
+
+        String[] cmd = {"/bin/sh", "-c", "cd ../../pegasus-bundle/foundation-guiwar/src/main/webapp/WEB-INF/spring; pwd"};
+        Process p = Runtime.getRuntime().exec(cmd);
+
+        String output = IOUtils.toString(p.getInputStream());
+        File f = new File(output.trim() + "/app-servlet.xml");
+
+        SAXBuilder builder = new SAXBuilder();
+
+        Document document = (Document) builder.build(f);
+        Element rootNode = document.getRootElement();
+
+        List<Element> list = rootNode.getChildren("component-scan", Namespace.getNamespace("http://www.springframework.org/schema/context"));
+
+        Element e = list.get(0);
+
+        String cnt = "<context:exclude-filter type=\"regex\" expression=\"pegasus\\.module\\." + functionName.toLowerCase() + "\\..*\" />";
+
+        e.addContent(cnt);
+
+        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat()) {
+            @Override
+            public String escapeElementEntities(String str) {
+                return str;
+            }
+        };
+
+        Writer writer = new OutputStreamWriter(new FileOutputStream(f), "utf-8");
+        outputter.output(document, writer);
+        writer.close();
 
     }
 }
